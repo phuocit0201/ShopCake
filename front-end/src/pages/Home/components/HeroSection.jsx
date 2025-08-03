@@ -1,5 +1,15 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { 
+  FaShoppingCart, 
+  FaPhone, 
+  FaCheck,
+  FaBirthdayCake,
+  FaCookie,
+  FaBreadSlice
+} from 'react-icons/fa';
+import { FiUsers, FiStar } from 'react-icons/fi';
+import { BiCake } from 'react-icons/bi';
 
 const HeroSection = () => {
   return (
@@ -15,7 +25,7 @@ const HeroSection = () => {
           <Col lg={6} className="mb-5 mb-lg-0">
             <div className="hero-content">
               <h1 className="display-4 fw-bold mb-4" style={{ color: 'var(--text-dark)' }}>
-                Bánh Ngon 🧁
+                Bánh Ngon <FaBirthdayCake style={{ color: 'var(--primary-color)' }} />
                 <br />
                 <span style={{ color: 'var(--primary-color)' }}>
                   Từ Trái Tim
@@ -28,15 +38,15 @@ const HeroSection = () => {
               
               <div className="hero-features mb-4">
                 <div className="d-flex align-items-center mb-2">
-                  <span className="me-3 fs-5">✅</span>
+                  <FaCheck className="me-3 text-success" size={20} />
                   <span>100% nguyên liệu tự nhiên</span>
                 </div>
                 <div className="d-flex align-items-center mb-2">
-                  <span className="me-3 fs-5">✅</span>
+                  <FaCheck className="me-3 text-success" size={20} />
                   <span>Giao hàng tận nơi miễn phí</span>
                 </div>
                 <div className="d-flex align-items-center mb-2">
-                  <span className="me-3 fs-5">✅</span>
+                  <FaCheck className="me-3 text-success" size={20} />
                   <span>Đặt hàng online 24/7</span>
                 </div>
               </div>
@@ -47,7 +57,8 @@ const HeroSection = () => {
                   className="btn-primary-custom px-4"
                   style={{ minWidth: '200px' }}
                 >
-                  🛒 Đặt Hàng Ngay
+                  <FaShoppingCart className="me-2" />
+                  Đặt Hàng Ngay
                 </Button>
                 <Button 
                   variant="outline-dark" 
@@ -55,26 +66,29 @@ const HeroSection = () => {
                   className="px-4"
                   style={{ minWidth: '200px' }}
                 >
-                  📞 Gọi Tư Vấn
+                  <FaPhone className="me-2" />
+                  Gọi Tư Vấn
                 </Button>
               </div>
               
               <div className="hero-stats mt-4 d-flex justify-content-between">
                 <div className="text-center">
                   <div className="fw-bold fs-4" style={{ color: 'var(--primary-color)' }}>
+                    <FiUsers className="me-1" />
                     1000+
                   </div>
                   <small className="text-muted">Khách hàng</small>
                 </div>
                 <div className="text-center">
                   <div className="fw-bold fs-4" style={{ color: 'var(--primary-color)' }}>
+                    <BiCake className="me-1" />
                     50+
                   </div>
                   <small className="text-muted">Loại bánh</small>
                 </div>
                 <div className="text-center">
                   <div className="fw-bold fs-4" style={{ color: 'var(--primary-color)' }}>
-                    5⭐
+                    5<FiStar className="ms-1" />
                   </div>
                   <small className="text-muted">Đánh giá</small>
                 </div>
@@ -96,35 +110,34 @@ const HeroSection = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '6rem',
                     border: '3px solid var(--primary-color)'
                   }}
                 >
-                  🎂
+                  <FaBirthdayCake size={150} style={{ color: 'var(--primary-color)' }} />
                 </div>
                 
                 {/* Floating elements */}
                 <div className="position-absolute top-0 start-0 translate-middle">
                   <div className="bg-white rounded-circle p-3 shadow animate-float">
-                    <span className="fs-4">🧁</span>
+                    <FaBirthdayCake size={32} style={{ color: 'var(--primary-color)' }} />
                   </div>
                 </div>
                 
                 <div className="position-absolute top-0 end-0 translate-middle">
                   <div className="bg-white rounded-circle p-3 shadow animate-float" style={{ animationDelay: '0.5s' }}>
-                    <span className="fs-4">🍪</span>
+                    <FaCookie size={32} style={{ color: 'var(--accent-color)' }} />
                   </div>
                 </div>
                 
                 <div className="position-absolute bottom-0 start-0 translate-middle">
                   <div className="bg-white rounded-circle p-3 shadow animate-float" style={{ animationDelay: '1s' }}>
-                    <span className="fs-4">🥖</span>
+                    <FaBreadSlice size={32} style={{ color: 'var(--secondary-color)' }} />
                   </div>
                 </div>
                 
                 <div className="position-absolute bottom-0 end-0 translate-middle">
                   <div className="bg-white rounded-circle p-3 shadow animate-float" style={{ animationDelay: '1.5s' }}>
-                    <span className="fs-4">🍰</span>
+                    <BiCake size={32} style={{ color: 'var(--primary-color)' }} />
                   </div>
                 </div>
               </div>
