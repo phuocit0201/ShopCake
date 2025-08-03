@@ -1,16 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap';
-import { 
-  FaPhone, 
-  FaMapMarkerAlt, 
-  FaClock, 
-  FaUser, 
-  FaMobile, 
-  FaComments,
-  FaRocket,
-  FaBirthdayCake
-} from 'react-icons/fa';
-import { SiZalo } from 'react-icons/si';
 
 const ContactSection = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -41,7 +30,7 @@ const ContactSection = () => {
       <Container>
         <div className="text-center mb-5">
           <h2 className="display-5 fw-bold mb-3">
-            Liên Hệ Đặt Hàng <FaPhone style={{ color: 'var(--primary-color)' }} />
+            Liên Hệ Đặt Hàng 📞
           </h2>
           <p className="lead text-muted">
             Hãy để lại thông tin, chúng tôi sẽ liên hệ tư vấn ngay!
@@ -54,9 +43,7 @@ const ContactSection = () => {
             <Row className="mb-5">
               <Col md={4} className="mb-4 text-center">
                 <div className="contact-method p-4 rounded shadow-sm bg-light h-100">
-                  <div className="mb-3">
-                    <FaPhone size={48} style={{ color: 'var(--primary-color)' }} />
-                  </div>
+                  <div className="mb-3" style={{ fontSize: '3rem' }}>📞</div>
                   <h5 className="fw-bold mb-2">Hotline</h5>
                   <p className="mb-2 fw-bold" style={{ color: 'var(--primary-color)' }}>
                     0123.456.789
@@ -66,9 +53,7 @@ const ContactSection = () => {
               </Col>
               <Col md={4} className="mb-4 text-center">
                 <div className="contact-method p-4 rounded shadow-sm bg-light h-100">
-                  <div className="mb-3">
-                    <FaMapMarkerAlt size={48} style={{ color: 'var(--accent-color)' }} />
-                  </div>
+                  <div className="mb-3" style={{ fontSize: '3rem' }}>📍</div>
                   <h5 className="fw-bold mb-2">Địa Chỉ</h5>
                   <p className="mb-2">123 Đường ABC</p>
                   <small className="text-muted">Quận 1, TP.HCM</small>
@@ -76,9 +61,7 @@ const ContactSection = () => {
               </Col>
               <Col md={4} className="mb-4 text-center">
                 <div className="contact-method p-4 rounded shadow-sm bg-light h-100">
-                  <div className="mb-3">
-                    <FaClock size={48} style={{ color: 'var(--secondary-color)' }} />
-                  </div>
+                  <div className="mb-3" style={{ fontSize: '3rem' }}>🕒</div>
                   <h5 className="fw-bold mb-2">Giờ Mở Cửa</h5>
                   <p className="mb-2">6:00 - 22:00</p>
                   <small className="text-muted">Tất cả các ngày</small>
@@ -89,7 +72,7 @@ const ContactSection = () => {
             {/* Contact Form */}
             <div className="contact-form bg-white rounded-4 shadow-lg p-4 p-lg-5">
               <h4 className="text-center mb-4 fw-bold">
-                Đặt Hàng Nhanh <FaBirthdayCake style={{ color: 'var(--primary-color)' }} />
+                Đặt Hàng Nhanh 🎂
               </h4>
               
               {showAlert && (
@@ -103,7 +86,7 @@ const ContactSection = () => {
                   <Col md={6} className="mb-3">
                     <Form.Group>
                       <Form.Label className="fw-500">
-                        <FaUser className="me-2" />Họ và tên *
+                        <span className="me-2">👤</span>Họ và tên *
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -119,7 +102,7 @@ const ContactSection = () => {
                   <Col md={6} className="mb-3">
                     <Form.Group>
                       <Form.Label className="fw-500">
-                        <FaMobile className="me-2" />Số điện thoại *
+                        <span className="me-2">📱</span>Số điện thoại *
                       </Form.Label>
                       <Form.Control
                         type="tel"
@@ -136,7 +119,7 @@ const ContactSection = () => {
                 
                 <Form.Group className="mb-4">
                   <Form.Label className="fw-500">
-                    <FaComments className="me-2" />Yêu cầu đặc biệt
+                    <span className="me-2">💬</span>Yêu cầu đặc biệt
                   </Form.Label>
                   <Form.Control
                     as="textarea"
@@ -155,8 +138,7 @@ const ContactSection = () => {
                     size="lg" 
                     className="btn-primary-custom py-3 fw-bold"
                   >
-                    <FaRocket className="me-2" />
-                    Gửi Yêu Cầu Ngay
+                    🚀 Gửi Yêu Cầu Ngay
                   </Button>
                   <small className="text-center text-muted mt-2">
                     * Chúng tôi cam kết không spam và bảo mật thông tin khách hàng
@@ -176,8 +158,7 @@ const ContactSection = () => {
                     className="w-100 py-3"
                     href="tel:0123456789"
                   >
-                    <FaPhone className="me-2" />
-                    Gọi Ngay: 0123.456.789
+                    📞 Gọi Ngay: 0123.456.789
                   </Button>
                 </Col>
                 <Col sm={6}>
@@ -188,8 +169,7 @@ const ContactSection = () => {
                     href="https://zalo.me/0123456789"
                     target="_blank"
                   >
-                    <SiZalo className="me-2" />
-                    Chat Zalo
+                    💬 Chat Zalo
                   </Button>
                 </Col>
               </Row>

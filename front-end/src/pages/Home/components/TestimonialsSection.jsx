@@ -1,13 +1,5 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { 
-  FaStar, 
-  FaComments, 
-  FaTrophy, 
-  FaTruck, 
-  FaSync, 
-  FaPhone
-} from 'react-icons/fa';
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -38,11 +30,7 @@ const TestimonialsSection = () => {
   ];
 
   const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 0; i < rating; i++) {
-      stars.push(<FaStar key={i} className="text-warning" />);
-    }
-    return stars;
+    return '⭐'.repeat(rating);
   };
 
   return (
@@ -50,7 +38,7 @@ const TestimonialsSection = () => {
       <Container>
         <div className="text-center mb-5">
           <h2 className="display-5 fw-bold mb-3">
-            Khách Hàng Nói Gì? <FaComments style={{ color: 'var(--primary-color)' }} />
+            Khách Hàng Nói Gì? 💬
           </h2>
           <p className="lead text-muted">
             Những phản hồi chân thật từ khách hàng của chúng tôi
@@ -100,36 +88,28 @@ const TestimonialsSection = () => {
           <Row className="text-center">
             <Col lg={3} md={6} className="mb-4">
               <div className="trust-item">
-                <div className="mb-2">
-                  <FaTrophy size={40} style={{ color: 'var(--primary-color)' }} />
-                </div>
+                <div className="mb-2" style={{ fontSize: '2.5rem' }}>🏆</div>
                 <h6 className="fw-bold">Chất Lượng Đảm Bảo</h6>
                 <small className="text-muted">ISO 22000 Certified</small>
               </div>
             </Col>
             <Col lg={3} md={6} className="mb-4">
               <div className="trust-item">
-                <div className="mb-2">
-                  <FaTruck size={40} style={{ color: 'var(--accent-color)' }} />
-                </div>
+                <div className="mb-2" style={{ fontSize: '2.5rem' }}>🚚</div>
                 <h6 className="fw-bold">Giao Hàng Miễn Phí</h6>
                 <small className="text-muted">Đơn hàng từ 200k</small>
               </div>
             </Col>
             <Col lg={3} md={6} className="mb-4">
               <div className="trust-item">
-                <div className="mb-2">
-                  <FaSync size={40} style={{ color: 'var(--secondary-color)' }} />
-                </div>
+                <div className="mb-2" style={{ fontSize: '2.5rem' }}>🔄</div>
                 <h6 className="fw-bold">Đổi Trả Dễ Dàng</h6>
                 <small className="text-muted">Trong vòng 24h</small>
               </div>
             </Col>
             <Col lg={3} md={6} className="mb-4">
               <div className="trust-item">
-                <div className="mb-2">
-                  <FaPhone size={40} className="text-success" />
-                </div>
+                <div className="mb-2" style={{ fontSize: '2.5rem' }}>📞</div>
                 <h6 className="fw-bold">Hỗ Trợ 24/7</h6>
                 <small className="text-muted">Hotline: 0123.456.789</small>
               </div>
