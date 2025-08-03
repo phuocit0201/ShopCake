@@ -1,25 +1,33 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import { 
+  FaLeaf, 
+  FaUserTie, 
+  FaTruck, 
+  FaHeart,
+  FaBirthdayCake,
+  FaStore
+} from 'react-icons/fa';
 
 const AboutSection = () => {
   const features = [
     {
-      icon: '🌱',
+      icon: <FaLeaf size={48} className="text-success" />,
       title: 'Nguyên Liệu Tự Nhiên',
       description: 'Chúng tôi chỉ sử dụng nguyên liệu tự nhiên, tươi ngon được chọn lọc kỹ càng từ các nhà cung cấp uy tín.'
     },
     {
-      icon: '👨‍🍳',
+      icon: <FaUserTie size={48} style={{ color: 'var(--primary-color)' }} />,
       title: 'Thầy Bánh Chuyên Nghiệp',
       description: 'Đội ngũ thầy bánh giàu kinh nghiệm với nhiều năm học tập và làm việc tại các tiệm bánh nổi tiếng.'
     },
     {
-      icon: '🚚',
+      icon: <FaTruck size={48} style={{ color: 'var(--accent-color)' }} />,
       title: 'Giao Hàng Nhanh Chóng',
       description: 'Hệ thống giao hàng 24/7 với cam kết giữ nguyên chất lượng và độ tươi ngon của sản phẩm.'
     },
     {
-      icon: '💝',
+      icon: <FaHeart size={48} className="text-danger" />,
       title: 'Dịch Vụ Tận Tâm',
       description: 'Chúng tôi luôn lắng nghe và đáp ứng mọi yêu cầu đặc biệt của khách hàng với thái độ nhiệt tình.'
     }
@@ -32,7 +40,7 @@ const AboutSection = () => {
           <Col lg={6} className="mb-5 mb-lg-0">
             <div className="about-content">
               <h2 className="display-5 fw-bold mb-4">
-                Về Sweet Bakery 🧁
+                Về Sweet Bakery <FaBirthdayCake style={{ color: 'var(--primary-color)' }} />
               </h2>
               <p className="lead mb-4">
                 Với hơn 5 năm kinh nghiệm, Sweet Bakery tự hào là một trong những 
@@ -90,11 +98,10 @@ const AboutSection = () => {
                   background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '8rem'
+                  justifyContent: 'center'
                 }}
               >
-                🏪
+                <FaStore size={200} style={{ color: 'var(--primary-color)' }} />
               </div>
             </div>
           </Col>
@@ -104,14 +111,14 @@ const AboutSection = () => {
         <Row className="mt-5 pt-5">
           <Col lg={12}>
             <h3 className="text-center mb-5 fw-bold">
-              Tại Sao Chọn Sweet Bakery? 🤔
+              Tại Sao Chọn Sweet Bakery? <FaHeart className="text-danger" />
             </h3>
             <Row className="g-4">
               {features.map((feature, index) => (
                 <Col lg={3} md={6} key={index}>
                   <Card className="text-center h-100 border-0 shadow-sm">
                     <Card.Body className="p-4">
-                      <div className="feature-icon mb-3" style={{ fontSize: '3rem' }}>
+                      <div className="feature-icon mb-3">
                         {feature.icon}
                       </div>
                       <Card.Title className="h5 mb-3">

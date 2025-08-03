@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { 
+  FaHome, 
+  FaInfoCircle, 
+  FaPhone, 
+  FaShoppingCart,
+  FaBirthdayCake
+} from 'react-icons/fa';
+import { BiCake } from 'react-icons/bi';
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -13,7 +21,7 @@ const Header = () => {
       <Navbar expand="lg" className="bg-white shadow-sm sticky-top">
         <Container>
           <Navbar.Brand as={Link} to="/" className="fw-bold fs-3">
-            <span style={{ color: 'var(--primary-color)' }}>🧁</span>
+            <FaBirthdayCake style={{ color: 'var(--primary-color)' }} />
             <span className="ms-2" style={{ color: 'var(--text-dark)' }}>Sweet Bakery</span>
           </Navbar.Brand>
 
@@ -41,7 +49,7 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link as={Link} to="/cart" className="mx-2">
                 <span className="position-relative">
-                  🛒
+                  <FaShoppingCart size={20} />
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.7em' }}>
                     3
                   </span>
@@ -56,30 +64,30 @@ const Header = () => {
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton className="border-bottom">
           <Offcanvas.Title>
-            <span style={{ color: 'var(--primary-color)' }}>🧁</span>
+            <FaBirthdayCake style={{ color: 'var(--primary-color)' }} />
             <span className="ms-2" style={{ color: 'var(--text-dark)' }}>Sweet Bakery</span>
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column">
             <Nav.Link as={Link} to="/" className="py-3 border-bottom" onClick={handleClose}>
-              <span className="fs-5">🏠</span>
+              <FaHome size={20} />
               <span className="ms-3">Trang Chủ</span>
             </Nav.Link>
             <Nav.Link as={Link} to="/products" className="py-3 border-bottom" onClick={handleClose}>
-              <span className="fs-5">🧁</span>
+              <BiCake size={20} />
               <span className="ms-3">Sản Phẩm</span>
             </Nav.Link>
             <Nav.Link as={Link} to="/about" className="py-3 border-bottom" onClick={handleClose}>
-              <span className="fs-5">ℹ️</span>
+              <FaInfoCircle size={20} />
               <span className="ms-3">Giới Thiệu</span>
             </Nav.Link>
             <Nav.Link as={Link} to="/contact" className="py-3 border-bottom" onClick={handleClose}>
-              <span className="fs-5">📞</span>
+              <FaPhone size={20} />
               <span className="ms-3">Liên Hệ</span>
             </Nav.Link>
             <Nav.Link as={Link} to="/cart" className="py-3" onClick={handleClose}>
-              <span className="fs-5">🛒</span>
+              <FaShoppingCart size={20} />
               <span className="ms-3">Giỏ Hàng</span>
               <span className="badge bg-danger ms-auto">3</span>
             </Nav.Link>
@@ -88,7 +96,8 @@ const Header = () => {
           <div className="mt-4 pt-4 border-top">
             <div className="d-grid gap-2">
               <button className="btn btn-primary-custom">
-                📞 Gọi Đặt Hàng
+                <FaPhone className="me-2" />
+                Gọi Đặt Hàng
               </button>
               <small className="text-center text-muted">
                 Hotline: 0123.456.789
