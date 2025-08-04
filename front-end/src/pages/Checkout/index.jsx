@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Container, Row, Col, Card, Button, Form, Alert } from 'react-bootstrap';
 import { 
-  FaShoppingCart,
   FaArrowLeft,
   FaCheck,
   FaPhone,
@@ -10,10 +9,7 @@ import {
   FaMoneyBillWave,
   FaTruck,
   FaUser,
-  FaEnvelope,
   FaHome,
-  FaCity,
-  FaGlobe,
   FaLock
 } from 'react-icons/fa';
 import { BiCake } from 'react-icons/bi';
