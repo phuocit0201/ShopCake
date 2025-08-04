@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { 
-  FaHome, 
-  FaInfoCircle, 
-  FaPhone, 
+import {
+  FaHome,
+  FaInfoCircle,
+  FaPhone,
   FaShoppingCart,
   FaBirthdayCake,
-  FaBookmark
+  FaBookmark,
+  FaUser
 } from 'react-icons/fa';
 import { BiCake } from 'react-icons/bi';
 
@@ -51,6 +52,9 @@ const Header = () => {
               <Nav.Link as={Link} to="/contact" className="mx-2 fw-500">
                 Liên Hệ
               </Nav.Link>
+              <Nav.Link as={Link} to="/login" className="mx-2 fw-500">
+                Đăng Nhập
+              </Nav.Link>
               <Nav.Link as={Link} to="/cart" className="mx-2">
                 <span className="position-relative">
                   <FaShoppingCart size={20} />
@@ -93,6 +97,10 @@ const Header = () => {
             <Nav.Link as={Link} to="/contact" className="py-3 border-bottom" onClick={handleClose}>
               <FaPhone size={20} />
               <span className="ms-3">Liên Hệ</span>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/login" className="py-3 border-bottom" onClick={handleClose}>
+              <FaUser size={20} />
+              <span className="ms-3">Đăng Nhập</span>
             </Nav.Link>
             <Nav.Link as={Link} to="/cart" className="py-3" onClick={handleClose}>
               <FaShoppingCart size={20} />
