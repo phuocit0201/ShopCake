@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Container, Row, Col, Card, Button, Badge, Form, Modal, Table } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Badge, Form } from 'react-bootstrap';
 import { 
   FaShoppingBag,
   FaCalendarAlt,
@@ -23,8 +23,6 @@ import { Link } from 'react-router-dom';
 const OrderHistory = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null);
 
   // Sample order data
   const orders = useMemo(() => [
@@ -243,10 +241,7 @@ const OrderHistory = () => {
     return methods[method] || method;
   };
 
-  const handleViewOrder = (order) => {
-    setSelectedOrder(order);
-    setShowModal(true);
-  };
+
 
   const handleReorder = (order) => {
     console.log('Reorder:', order.id);
@@ -333,7 +328,8 @@ const OrderHistory = () => {
               <Button 
                 variant="outline-primary" 
                 size="sm"
-                onClick={() => handleViewOrder(order)}
+                as={Link}
+                to={`/orders/${order.id}`}
                 className="flex-grow-1"
               >
                 <FaEye className="me-1" />
@@ -502,128 +498,7 @@ const OrderHistory = () => {
         </div>
       </Container>
 
-      {/* Order Detail Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Chi Tiết Đơn Hàng #{selectedOrder?.id}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedOrder && (
-            <>
-              {/* Order Status */}
-              <div className="mb-4">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h6>Trạng Thái Đơn Hàng</h6>
-                  <Badge bg={getStatusColor(selectedOrder.status)} className="fs-6">
-                    {getStatusIcon(selectedOrder.status)}
-                    <span className="ms-1">{getStatusText(selectedOrder.status)}</span>
-                  </Badge>
-                </div>
-                
-                {/* Timeline */}
-                <div className="timeline">
-                  {selectedOrder.timeline.map((step, index) => (
-                    <div key={index} className="timeline-item">
-                      <div className="timeline-content">
-                        <small className="text-muted">{formatDate(step.time)}</small>
-                        <div>{step.message}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Order Items */}
-              <div className="mb-4">
-                <h6 className="mb-3">Sản Phẩm Đã Đặt</h6>
-                <Table striped>
-                  <thead>
-                    <tr>
-                      <th>Sản Phẩm</th>
-                      <th>Số Lượng</th>
-                      <th>Đơn Giá</th>
-                      <th>Thành Tiền</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedOrder.items.map(item => (
-                      <tr key={item.id}>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <img 
-                              src={item.image} 
-                              alt={item.name}
-                              style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-                              className="rounded me-3"
-                            />
-                            <span>{item.name}</span>
-                          </div>
-                        </td>
-                        <td>{item.quantity}</td>
-                        <td>{formatCurrency(item.price)}</td>
-                        <td className="fw-bold">{formatCurrency(item.price * item.quantity)}</td>
-                      </tr>
-                    ))}
-                    <tr className="table-primary">
-                      <td colSpan="3" className="fw-bold">Tổng Cộng:</td>
-                      <td className="fw-bold fs-5 text-primary">{formatCurrency(selectedOrder.total)}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>
-
-              {/* Delivery Info */}
-              <Row>
-                <Col md={6}>
-                  <h6 className="mb-3">Thông Tin Giao Hàng</h6>
-                  <div className="mb-2">
-                    <FaMapMarkerAlt className="me-2" />
-                    <span>{selectedOrder.deliveryAddress}</span>
-                  </div>
-                  {selectedOrder.estimatedDelivery && (
-                    <div className="mb-2">
-                      <FaCalendarAlt className="me-2" />
-                      <span>Dự kiến: {formatDate(selectedOrder.estimatedDelivery)}</span>
-                    </div>
-                  )}
-                  {selectedOrder.trackingNumber && (
-                    <div className="mb-2">
-                      <FaTruck className="me-2" />
-                      <span>Mã vận đơn: {selectedOrder.trackingNumber}</span>
-                    </div>
-                  )}
-                </Col>
-                <Col md={6}>
-                  <h6 className="mb-3">Thanh Toán</h6>
-                  <div className="mb-2">
-                    <FaCreditCard className="me-2" />
-                    <span>{getPaymentMethodText(selectedOrder.paymentMethod)}</span>
-                  </div>
-                  <div className="mb-2">
-                    <FaShippingFast className="me-2" />
-                    <span>
-                      {selectedOrder.deliveryMethod === 'express' ? 'Giao hàng nhanh' : 'Giao hàng tiêu chuẩn'}
-                    </span>
-                  </div>
-                </Col>
-              </Row>
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Đóng
-          </Button>
-          {selectedOrder?.status === 'delivered' && (
-            <Button variant="primary" onClick={() => handleReorder(selectedOrder)}>
-              <FaRedo className="me-1" />
-              Đặt Lại Đơn Hàng
-            </Button>
-          )}
-        </Modal.Footer>
-      </Modal>
 
       <style jsx>{`
         .order-history-page {
