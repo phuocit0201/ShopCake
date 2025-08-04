@@ -55,6 +55,9 @@ const Header = () => {
               <Nav.Link as={Link} to="/login" className="mx-2 fw-500">
                 Đăng Nhập
               </Nav.Link>
+              <Nav.Link as={Link} to="/register" className="mx-2 fw-500">
+                Đăng Ký
+              </Nav.Link>
               <Nav.Link as={Link} to="/cart" className="mx-2">
                 <span className="position-relative">
                   <FaShoppingCart size={20} />
@@ -101,6 +104,10 @@ const Header = () => {
             <Nav.Link as={Link} to="/login" className="py-3 border-bottom" onClick={handleClose}>
               <FaUser size={20} />
               <span className="ms-3">Đăng Nhập</span>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/register" className="py-3 border-bottom" onClick={handleClose}>
+              <FaUser size={20} />
+              <span className="ms-3">Đăng Ký</span>
             </Nav.Link>
             <Nav.Link as={Link} to="/cart" className="py-3" onClick={handleClose}>
               <FaShoppingCart size={20} />

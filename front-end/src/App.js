@@ -10,6 +10,7 @@ import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import About from './pages/About';
@@ -30,6 +31,7 @@ function App() {
             <Route path="/orders-history" element={<OrderHistory />} />
             <Route path="/orders/:orderId" element={<OrderDetail />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
