@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Container, Row, Col, Card, Button, Form, Alert, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { 
   FaShoppingCart,
   FaTrash,
@@ -8,11 +8,7 @@ import {
   FaArrowLeft,
   FaCheck,
   FaPhone,
-  FaMapMarkerAlt,
-  FaCreditCard,
-  FaMoneyBillWave,
-  FaTag,
-  FaGift
+  FaCreditCard
 } from 'react-icons/fa';
 import { BiCake } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
@@ -50,25 +46,16 @@ const Cart = () => {
     }
   ]);
 
-  const [couponCode, setCouponCode] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState(null);
-  const [deliveryMethod, setDeliveryMethod] = useState('delivery'); // 'delivery' or 'pickup'
-
   // Calculate totals
   const calculations = useMemo(() => {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const deliveryFee = deliveryMethod === 'delivery' ? 30000 : 0;
-    const discount = appliedCoupon ? Math.min(subtotal * 0.1, 50000) : 0; // 10% max 50k
-    const total = subtotal + deliveryFee - discount;
+    const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
     return {
       subtotal,
-      deliveryFee,
-      discount,
-      total,
-      itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)
+      itemCount
     };
-  }, [cartItems, deliveryMethod, appliedCoupon]);
+  }, [cartItems]);
 
   // Handle quantity changes
   const updateQuantity = (id, newQuantity) => {
@@ -89,26 +76,6 @@ const Cart = () => {
 
   const clearCart = () => {
     setCartItems([]);
-    setAppliedCoupon(null);
-    setCouponCode('');
-  };
-
-  const applyCoupon = () => {
-    // Simple coupon validation
-    if (couponCode.toLowerCase() === 'welcome10') {
-      setAppliedCoupon({
-        code: 'WELCOME10',
-        name: 'Giảm 10% cho khách hàng mới',
-        discount: 0.1
-      });
-      setCouponCode('');
-    } else {
-      alert('Mã giảm giá không hợp lệ!');
-    }
-  };
-
-  const removeCoupon = () => {
-    setAppliedCoupon(null);
   };
 
   const formatCurrency = (amount) => {
@@ -336,127 +303,52 @@ const Cart = () => {
                 </h5>
               </Card.Header>
               <Card.Body>
-                {/* Delivery Method */}
-                <div className="mb-4">
-                  <h6 className="mb-3">Phương Thức Nhận Hàng</h6>
-                  <Form.Check
-                    type="radio"
-                    id="delivery"
-                    name="deliveryMethod"
-                    label={
-                      <span>
-                        <FaMapMarkerAlt className="me-2" />
-                        Giao hàng tận nơi (+30.000đ)
-                      </span>
-                    }
-                    checked={deliveryMethod === 'delivery'}
-                    onChange={(e) => setDeliveryMethod('delivery')}
-                    className="mb-2"
-                  />
-                  <Form.Check
-                    type="radio"
-                    id="pickup"
-                    name="deliveryMethod"
-                    label={
-                      <span>
-                        <FaShoppingCart className="me-2" />
-                        Nhận tại cửa hàng (Miễn phí)
-                      </span>
-                    }
-                    checked={deliveryMethod === 'pickup'}
-                    onChange={(e) => setDeliveryMethod('pickup')}
-                  />
-                </div>
-
-                {/* Coupon Code */}
-                <div className="mb-4">
-                  <h6 className="mb-3">
-                    <FaTag className="me-2" />
-                    Mã Giảm Giá
-                  </h6>
-                  {appliedCoupon ? (
-                    <Alert variant="success" className="d-flex justify-content-between align-items-center">
-                      <span>
-                        <FaGift className="me-2" />
-                        {appliedCoupon.name}
-                      </span>
-                      <Button 
-                        variant="outline-success" 
-                        size="sm"
-                        onClick={removeCoupon}
-                      >
-                        ×
-                      </Button>
-                    </Alert>
-                  ) : (
-                    <div className="d-flex gap-2">
-                      <Form.Control
-                        type="text"
-                        placeholder="Nhập mã giảm giá"
-                        value={couponCode}
-                        onChange={(e) => setCouponCode(e.target.value)}
-                      />
-                      <Button 
-                        variant="outline-primary"
-                        onClick={applyCoupon}
-                        disabled={!couponCode.trim()}
-                      >
-                        Áp Dụng
-                      </Button>
-                    </div>
-                  )}
-                  <small className="text-muted">
-                    Thử mã: <code>WELCOME10</code>
-                  </small>
-                </div>
-
                 {/* Price Breakdown */}
-                <div className="price-breakdown">
-                  <div className="d-flex justify-content-between mb-2">
-                    <span>Tạm tính:</span>
-                    <span>{formatCurrency(calculations.subtotal)}</span>
+                <div className="price-breakdown mb-4">
+                  <div className="d-flex justify-content-between mb-3 py-2 border-bottom">
+                    <span className="fs-6">Tạm tính ({calculations.itemCount} sản phẩm):</span>
+                    <span className="fw-semibold">{formatCurrency(calculations.subtotal)}</span>
                   </div>
                   
-                  {deliveryMethod === 'delivery' && (
-                    <div className="d-flex justify-content-between mb-2">
-                      <span>Phí giao hàng:</span>
-                      <span>{formatCurrency(calculations.deliveryFee)}</span>
-                    </div>
-                  )}
+                  <div className="d-flex justify-content-between mb-3 py-2">
+                    <span className="fs-6">Phí vận chuyển:</span>
+                    <span className="text-muted">Tính khi thanh toán</span>
+                  </div>
                   
-                  {appliedCoupon && (
-                    <div className="d-flex justify-content-between mb-2 text-success">
-                      <span>Giảm giá:</span>
-                      <span>-{formatCurrency(calculations.discount)}</span>
-                    </div>
-                  )}
+                  <div className="d-flex justify-content-between mb-3 py-2">
+                    <span className="fs-6">Thuế VAT:</span>
+                    <span className="text-muted">Đã bao gồm</span>
+                  </div>
                   
-                  <hr />
-                  <div className="d-flex justify-content-between mb-3">
-                    <strong>Tổng cộng:</strong>
-                    <strong className="text-primary fs-5">
-                      {formatCurrency(calculations.total)}
+                  <hr className="my-3" />
+                  
+                  <div className="d-flex justify-content-between mb-4 py-2">
+                    <strong className="fs-5">Tổng tiền:</strong>
+                    <strong className="text-primary fs-4">
+                      {formatCurrency(calculations.subtotal)}
                     </strong>
                   </div>
                 </div>
 
-                {/* Checkout Buttons */}
-                <div className="d-grid gap-2">
+                {/* Checkout Button */}
+                <div className="d-grid mb-3">
                   <Button 
                     variant="primary" 
                     size="lg"
-                    className="fw-bold"
+                    className="fw-bold py-3"
+                    as={Link}
+                    to="/checkout"
                   >
                     <FaCreditCard className="me-2" />
-                    Thanh Toán Online
+                    Tiến Hành Thanh Toán
                   </Button>
-                  <Button 
-                    variant="outline-primary" 
-                    size="lg"
-                  >
-                    <FaMoneyBillWave className="me-2" />
-                    Thanh Toán Khi Nhận Hàng
-                  </Button>
+                </div>
+
+                {/* Additional Info */}
+                <div className="text-center">
+                  <small className="text-muted">
+                    🔒 Thanh toán an toàn & bảo mật
+                  </small>
                 </div>
 
                 {/* Contact Info */}
@@ -467,7 +359,7 @@ const Cart = () => {
                       variant="link" 
                       size="sm" 
                       href="tel:0123456789"
-                      className="p-0 ms-1"
+                      className="p-0 ms-1 fw-semibold"
                     >
                       <FaPhone className="me-1" />
                       0123.456.789
