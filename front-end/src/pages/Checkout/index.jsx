@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Container, Row, Col, Card, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import { 
   FaArrowLeft,
   FaCheck,
@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 const Checkout = () => {
   // Sample cart data - in real app this would come from Redux/Context
-  const cartItems = [
+  const cartItems = useMemo(() => [
     {
       id: 1,
       name: 'Bánh Kem Dâu Tươi',
@@ -45,7 +45,7 @@ const Checkout = () => {
       quantity: 1,
       category: 'cookies'
     }
-  ];
+  ], []);
 
   // Customer Information Form
   const [customerInfo, setCustomerInfo] = useState({
