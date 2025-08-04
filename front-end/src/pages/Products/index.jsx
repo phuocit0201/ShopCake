@@ -170,6 +170,16 @@ const Products = () => {
         rating: 4,
         category: 'donut',
         description: 'Donut truyền thống với lớp glaze trắng ngọt ngào'
+      },
+      {
+        id: 13,
+        name: 'Donut Glazed 1',
+        price: 39000,
+        originalPrice: null,
+        image: <BiCake size={60} style={{ color: 'var(--primary-color)' }} />,
+        rating: 4,
+        category: 'donut',
+        description: 'Donut truyền thống với lớp glaze trắng ngọt ngào'
       }
     ];
 
@@ -224,6 +234,12 @@ const Products = () => {
     setSearchTerm('');
     setSelectedCategory('all');
     setCurrentPage(1);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Scroll to top of products section
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -287,49 +303,115 @@ const Products = () => {
         {/* Pagination */}
         {totalPages > 1 && (
           <Row className="mt-5">
-            <Col className="d-flex justify-content-center">
-              <Pagination>
-                <Pagination.First 
-                  onClick={() => setCurrentPage(1)}
-                  disabled={currentPage === 1}
-                />
-                <Pagination.Prev 
-                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                  disabled={currentPage === 1}
-                />
-                
-                {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
-                  let pageNum;
-                  if (totalPages <= 5) {
-                    pageNum = index + 1;
-                  } else if (currentPage <= 3) {
-                    pageNum = index + 1;
-                  } else if (currentPage >= totalPages - 2) {
-                    pageNum = totalPages - 4 + index;
-                  } else {
-                    pageNum = currentPage - 2 + index;
-                  }
-                  
-                  return (
-                    <Pagination.Item
-                      key={pageNum}
-                      active={pageNum === currentPage}
-                      onClick={() => setCurrentPage(pageNum)}
-                    >
-                      {pageNum}
-                    </Pagination.Item>
-                  );
-                })}
+            <Col>
+              {/* Mobile Pagination Info */}
+              <div className="d-block d-md-none text-center mb-3">
+                <small className="text-muted">
+                  Trang {currentPage} / {totalPages} 
+                  <span className="mx-2">•</span>
+                  {filteredAndSortedProducts.length} sản phẩm
+                </small>
+              </div>
 
-                <Pagination.Next 
-                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                  disabled={currentPage === totalPages}
-                />
-                <Pagination.Last 
-                  onClick={() => setCurrentPage(totalPages)}
-                  disabled={currentPage === totalPages}
-                />
-              </Pagination>
+              {/* Desktop Pagination */}
+              <div className="d-none d-md-flex justify-content-center">
+                <Pagination size="lg">
+                  <Pagination.First 
+                    onClick={() => handlePageChange(1)}
+                    disabled={currentPage === 1}
+                  />
+                  <Pagination.Prev 
+                    onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                    disabled={currentPage === 1}
+                  />
+                  
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
+                    let pageNum;
+                    if (totalPages <= 5) {
+                      pageNum = index + 1;
+                    } else if (currentPage <= 3) {
+                      pageNum = index + 1;
+                    } else if (currentPage >= totalPages - 2) {
+                      pageNum = totalPages - 4 + index;
+                    } else {
+                      pageNum = currentPage - 2 + index;
+                    }
+                    
+                    return (
+                      <Pagination.Item
+                        key={pageNum}
+                        active={pageNum === currentPage}
+                        onClick={() => handlePageChange(pageNum)}
+                      >
+                        {pageNum}
+                      </Pagination.Item>
+                    );
+                  })}
+
+                  <Pagination.Next 
+                    onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                  />
+                  <Pagination.Last 
+                    onClick={() => handlePageChange(totalPages)}
+                    disabled={currentPage === totalPages}
+                  />
+                </Pagination>
+              </div>
+
+              {/* Mobile Pagination Controls */}
+              <div className="d-block d-md-none">
+                <Row>
+                  <Col xs={6}>
+                    <Button 
+                      variant="outline-primary" 
+                      className="w-100"
+                      onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                      disabled={currentPage === 1}
+                    >
+                      ← Trang Trước
+                    </Button>
+                  </Col>
+                  <Col xs={6}>
+                    <Button 
+                      variant="outline-primary" 
+                      className="w-100"
+                      onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                      disabled={currentPage === totalPages}
+                    >
+                      Trang Sau →
+                    </Button>
+                  </Col>
+                </Row>
+                
+                {/* Quick Page Jump for Mobile */}
+                <div className="text-center mt-3">
+                  <div className="d-inline-flex align-items-center gap-2">
+                    <small className="text-muted">Nhảy đến:</small>
+                    <select 
+                      value={currentPage} 
+                      onChange={(e) => handlePageChange(Number(e.target.value))}
+                      className="form-select form-select-sm"
+                      style={{ width: 'auto' }}
+                    >
+                      {Array.from({ length: totalPages }, (_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          Trang {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pagination Summary */}
+              <div className="text-center mt-4">
+                <small className="text-muted">
+                  Hiển thị {((currentPage - 1) * itemsPerPage) + 1} - {Math.min(currentPage * itemsPerPage, filteredAndSortedProducts.length)} 
+                  <span className="mx-1">trong tổng số</span>
+                  <strong>{filteredAndSortedProducts.length}</strong> sản phẩm
+                </small>
+              </div>
             </Col>
           </Row>
         )}
@@ -385,6 +467,65 @@ const Products = () => {
           background-color: var(--secondary-color);
           border-color: var(--secondary-color);
           transform: translateY(-2px);
+        }
+
+        /* Pagination Styles */
+        .pagination {
+          margin-bottom: 0;
+        }
+        
+        .pagination .page-link {
+          border-radius: 50px;
+          margin: 0 2px;
+          padding: 12px 18px;
+          font-weight: 500;
+          border: 2px solid transparent;
+          transition: all 0.3s ease;
+        }
+        
+        .pagination .page-item.active .page-link {
+          background-color: var(--primary-color);
+          border-color: var(--primary-color);
+          color: white;
+          transform: scale(1.1);
+        }
+        
+        .pagination .page-link:hover {
+          background-color: var(--accent-color);
+          border-color: var(--accent-color);
+          color: white;
+          transform: translateY(-2px);
+        }
+        
+        .pagination .page-item.disabled .page-link {
+          opacity: 0.5;
+          transform: none;
+        }
+        
+        /* Mobile Pagination Buttons */
+        .btn-outline-primary {
+          border-radius: 25px;
+          font-weight: 500;
+          padding: 12px 24px;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Page Jump Select */
+        .form-select-sm {
+          border-radius: 20px;
+          border: 2px solid var(--primary-color);
+          color: var(--primary-color);
+          font-weight: 500;
+        }
+        
+        .form-select-sm:focus {
+          border-color: var(--secondary-color);
+          box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
         }
       `}</style>
     </div>
