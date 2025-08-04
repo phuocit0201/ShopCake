@@ -6,7 +6,8 @@ import {
   FaInfoCircle, 
   FaPhone, 
   FaShoppingCart,
-  FaBirthdayCake
+  FaBirthdayCake,
+  FaBookmark
 } from 'react-icons/fa';
 import { BiCake } from 'react-icons/bi';
 
@@ -40,6 +41,9 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link as={Link} to="/products" className="mx-2 fw-500">
                 Sản Phẩm
+              </Nav.Link>
+              <Nav.Link as={Link} to="/blog" className="mx-2 fw-500">
+                Bài Viết
               </Nav.Link>
               <Nav.Link as={Link} to="/about" className="mx-2 fw-500">
                 Giới Thiệu
@@ -77,6 +81,10 @@ const Header = () => {
             <Nav.Link as={Link} to="/products" className="py-3 border-bottom" onClick={handleClose}>
               <BiCake size={20} />
               <span className="ms-3">Sản Phẩm</span>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/blog" className="py-3 border-bottom" onClick={handleClose}>
+              <FaBookmark size={20} />
+              <span className="ms-3">Blog</span>
             </Nav.Link>
             <Nav.Link as={Link} to="/about" className="py-3 border-bottom" onClick={handleClose}>
               <FaInfoCircle size={20} />
