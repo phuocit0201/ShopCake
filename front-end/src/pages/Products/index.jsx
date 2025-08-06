@@ -238,8 +238,8 @@ const Products = () => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    // Scroll to top of products section
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Instant scroll to top
+    window.scrollTo(0, 0);
   };
 
   return (

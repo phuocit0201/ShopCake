@@ -360,23 +360,63 @@ const OrderDetail = () => {
     <div className="order-detail-page py-5" style={{ background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)', minHeight: '100vh' }}>
       <Container>
         {/* Header */}
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <div className="d-flex align-items-center">
-            <Button 
-              as={Link} 
-              to="/orders-history" 
-              variant="outline-primary" 
-              className="me-3"
-            >
-              <FaArrowLeft />
-            </Button>
-            <div>
-              <h2 className="mb-1">Chi Tiết Đơn Hàng #{orderData.id}</h2>
-              <div className="d-flex align-items-center gap-3">
-                <Badge bg={getStatusColor(orderData.status)} className="fs-6">
-                  {getStatusIcon(orderData.status)}
-                  <span className="ms-1">{getStatusText(orderData.status)}</span>
-                </Badge>
+        <div className="mb-4">
+          {/* Mobile Layout */}
+          <div className="d-block d-md-none">
+            {/* Back Button Row */}
+            <div className="mb-2">
+              <Button 
+                as={Link} 
+                to="/orders-history" 
+                variant="outline-primary" 
+                size="sm"
+                style={{ 
+                  width: '40px', 
+                  height: '36px',
+                  padding: '6px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <FaArrowLeft size={14} />
+              </Button>
+            </div>
+            
+            {/* Title Row */}
+            <div className="text-center mb-3">
+              <h3 className="mb-0">Chi Tiết Đơn Hàng</h3>
+            </div>
+            
+            {/* Order Info Row */}
+            <div className="text-center">
+              <h5 className="mb-2 text-primary">#{orderData.id}</h5>
+              <Badge bg={getStatusColor(orderData.status)} className="fs-6 px-3 py-2">
+                {getStatusIcon(orderData.status)}
+                <span className="ms-1">{getStatusText(orderData.status)}</span>
+              </Badge>
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="d-none d-md-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center">
+              <Button 
+                as={Link} 
+                to="/orders-history" 
+                variant="outline-primary" 
+                className="me-3"
+              >
+                <FaArrowLeft />
+              </Button>
+              <div>
+                <h2 className="mb-1">Chi Tiết Đơn Hàng #{orderData.id}</h2>
+                <div className="d-flex align-items-center gap-3">
+                  <Badge bg={getStatusColor(orderData.status)} className="fs-6">
+                    {getStatusIcon(orderData.status)}
+                    <span className="ms-1">{getStatusText(orderData.status)}</span>
+                  </Badge>
+                </div>
               </div>
             </div>
           </div>
