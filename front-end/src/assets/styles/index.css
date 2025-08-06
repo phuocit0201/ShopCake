@@ -97,7 +97,19 @@ h1, h2, h3, h4, h5, h6 {
   to { transform: rotate(360deg); }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Force instant scrolling - override all smooth behaviors */
+html, body, * {
+  scroll-behavior: auto !important;
+}
+
+/* Override any smooth scrolling from Bootstrap or other libraries */
+*, *::before, *::after {
+  scroll-behavior: auto !important;
+}
+
+/* Disable smooth scrolling for all elements */
+.smooth-scroll,
+[data-bs-smooth-scroll],
+[data-smooth-scroll] {
+  scroll-behavior: auto !important;
 }
