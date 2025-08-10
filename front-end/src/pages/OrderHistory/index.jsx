@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 const OrderHistory = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [confirmedOrders, setConfirmedOrders] = useState({});
 
   // Sample order data
   const orders = useMemo(() => [
@@ -248,6 +249,11 @@ const OrderHistory = () => {
     alert(`Đặt lại đơn hàng ${order.id}. Sản phẩm đã được thêm vào giỏ hàng!`);
   };
 
+  const handleConfirmReceived = (orderId) => {
+    setConfirmedOrders((prev) => ({ ...prev, [orderId]: true }));
+    alert(`Xác nhận đã nhận hàng cho đơn ${orderId}. Bạn có thể đánh giá sản phẩm.`);
+  };
+
   const OrderCard = ({ order }) => (
     <Card className="border-0 shadow-sm mb-4 order-card">
       <Card.Body>
@@ -338,6 +344,27 @@ const OrderHistory = () => {
               
               {order.status === 'delivered' && (
                 <>
+                  {!confirmedOrders[order.id] ? (
+                    <Button
+                      variant="success"
+                      size="sm"
+                      className="flex-grow-1"
+                      onClick={() => handleConfirmReceived(order.id)}
+                    >
+                      <FaCheck className="me-1" />
+                      Đã Nhận Hàng
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="warning"
+                      size="sm"
+                      className="flex-grow-1"
+                      as={Link}
+                      to={`/orders/${order.id}/review`}
+                    >
+                      Đánh Giá
+                    </Button>
+                  )}
                   <Button 
                     variant="outline-success" 
                     size="sm"
@@ -584,6 +611,11 @@ const OrderHistory = () => {
         
         .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-outline-success:hover, .btn-outline-info:hover {
           transform: translateY(-1px);
+        }
+
+        /* Ensure filled variants match rounded corners of outline buttons */
+        .btn-success, .btn-warning {
+          border-radius: 20px;
         }
         
         .card {
