@@ -5,6 +5,7 @@ import Cart from '../pages/Cart';
 import Checkout from '../pages/Checkout';
 import OrderHistory from '../pages/OrderHistory';
 import OrderDetail from '../pages/OrderDetail';
+import OrderReview from '../pages/OrderReview';
 
 // Protected Route Wrapper
 import ProtectedRoute from './ProtectedRoute';
@@ -50,6 +51,15 @@ const userRoutes = [
     element={
       <ProtectedRoute requiredRole="user">
         <OrderDetail />
+      </ProtectedRoute>
+    } 
+  />,
+  <Route 
+    key="order-review" 
+    path="/orders/:orderId/review" 
+    element={
+      <ProtectedRoute requiredRole="user">
+        <OrderReview />
       </ProtectedRoute>
     } 
   />,
