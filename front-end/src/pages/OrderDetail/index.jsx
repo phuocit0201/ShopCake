@@ -17,6 +17,7 @@ import {
   FaUser,
 } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
+import BackButton from '../../components/ui/BackButton';
 
 const OrderDetail = () => {
   const { orderId } = useParams();
@@ -365,22 +366,7 @@ const OrderDetail = () => {
           <div className="d-block d-md-none">
             {/* Back Button Row */}
             <div className="mb-2">
-              <Button 
-                as={Link} 
-                to="/orders-history" 
-                variant="outline-primary" 
-                size="sm"
-                style={{ 
-                  width: '40px', 
-                  height: '36px',
-                  padding: '6px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <FaArrowLeft size={14} />
-              </Button>
+              <BackButton to="/orders-history" variant="outline-primary" size="sm" className="back-button" />
             </div>
             
             {/* Title Row */}
@@ -401,14 +387,7 @@ const OrderDetail = () => {
           {/* Desktop Layout */}
           <div className="d-none d-md-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
-              <Button 
-                as={Link} 
-                to="/orders-history" 
-                variant="outline-primary" 
-                className="me-3"
-              >
-                <FaArrowLeft />
-              </Button>
+              <BackButton to="/orders-history" variant="outline-primary" className="me-3 back-button" showTextMdUp={false} />
               <div>
                 <h2 className="mb-1">Chi Tiết Đơn Hàng #{orderData.id}</h2>
                 <div className="d-flex align-items-center gap-3">
@@ -757,11 +736,6 @@ const OrderDetail = () => {
         .btn-primary:hover {
           transform: translateY(-2px);
           box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        .btn-outline-primary, .btn-outline-secondary, .btn-outline-danger, .btn-outline-info {
-          border-radius: 20px;
-          transition: all 0.3s ease;
         }
         
         .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-outline-danger:hover, .btn-outline-info:hover {

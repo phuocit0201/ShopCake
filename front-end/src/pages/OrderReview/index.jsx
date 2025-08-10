@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
-import { FaArrowLeft, FaStar, FaCamera } from 'react-icons/fa';
+import { FaStar, FaCamera } from 'react-icons/fa';
+import BackButton from '../../components/ui/BackButton';
 
 const OrderReview = () => {
   const { orderId } = useParams();
@@ -106,10 +107,7 @@ const OrderReview = () => {
       <Container>
         <Row className="mb-3 align-items-center">
           <Col xs={12} md="auto" className="mb-2 mb-md-0">
-            <Button as={Link} to={`/orders/${orderId}`} variant="light" className="border back-btn">
-              <FaArrowLeft className="me-md-2" />
-              <span className="d-none d-md-inline">Quay lại</span>
-            </Button>
+            <BackButton to={`/orders/${orderId}`} className="back-button" />
           </Col>
           <Col xs={12} md className="d-flex align-items-center">
             <h4 className="mb-0">Đánh Giá Đơn Hàng #{orderId}</h4>
@@ -236,16 +234,6 @@ const OrderReview = () => {
         .upload-box:focus {
           outline: 2px solid var(--primary-color);
           outline-offset: 2px;
-        }
-        @media (max-width: 767.98px) {
-          .back-btn {
-            width: 40px;
-            height: 36px;
-            padding: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-          }
         }
       `}</style>
     </div>

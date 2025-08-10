@@ -7,7 +7,6 @@ import {
   FaCreditCard,
   FaEye,
   FaDownload,
-  FaRedo,
   FaShippingFast,
   FaCheck,
   FaClock,
@@ -15,10 +14,12 @@ import {
   FaSearch,
   FaPhone,
   FaTruck,
-  FaBox
+  FaBox,
+  FaStar
 } from 'react-icons/fa';
 import { BiCake } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import ActionButton from '../../components/ui/ActionButton';
 
 const OrderHistory = () => {
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -242,13 +243,6 @@ const OrderHistory = () => {
     return methods[method] || method;
   };
 
-
-
-  const handleReorder = (order) => {
-    console.log('Reorder:', order.id);
-    alert(`Đặt lại đơn hàng ${order.id}. Sản phẩm đã được thêm vào giỏ hàng!`);
-  };
-
   const handleConfirmReceived = (orderId) => {
     setConfirmedOrders((prev) => ({ ...prev, [orderId]: true }));
     alert(`Xác nhận đã nhận hàng cho đơn ${orderId}. Bạn có thể đánh giá sản phẩm.`);
@@ -330,70 +324,55 @@ const OrderHistory = () => {
 
           {/* Action Buttons */}
           <Col lg={4} className="text-lg-end">
-            <div className="d-flex flex-lg-column gap-2">
-              <Button 
-                variant="outline-primary" 
-                size="sm"
-                as={Link}
+            <div className="d-grid gap-1 gap-lg-2 action-grid">
+              <ActionButton
                 to={`/orders/${order.id}`}
-                className="flex-grow-1"
+                variant="outline-primary"
+                icon={<FaEye />}
+                className="w-100"
               >
-                <FaEye className="me-1" />
                 Xem Chi Tiết
-              </Button>
+              </ActionButton>
               
               {order.status === 'delivered' && (
                 <>
                   {!confirmedOrders[order.id] ? (
-                    <Button
-                      variant="success"
-                      size="sm"
-                      className="flex-grow-1"
+                    <ActionButton
+                      variant="outline-success"
+                      icon={<FaCheck />}
+                      className="w-100"
                       onClick={() => handleConfirmReceived(order.id)}
                     >
-                      <FaCheck className="me-1" />
                       Đã Nhận Hàng
-                    </Button>
+                    </ActionButton>
                   ) : (
-                    <Button
-                      variant="warning"
-                      size="sm"
-                      className="flex-grow-1"
-                      as={Link}
+                    <ActionButton
                       to={`/orders/${order.id}/review`}
+                      variant="outline-warning"
+                      icon={<FaStar />}
+                      className="w-100"
                     >
                       Đánh Giá
-                    </Button>
+                    </ActionButton>
                   )}
-                  <Button 
-                    variant="outline-success" 
-                    size="sm"
-                    onClick={() => handleReorder(order)}
-                    className="flex-grow-1"
+                  <ActionButton 
+                    variant="outline-secondary"
+                    icon={<FaDownload />}
+                    className="w-100"
                   >
-                    <FaRedo className="me-1" />
-                    Đặt Lại
-                  </Button>
-                  <Button 
-                    variant="outline-secondary" 
-                    size="sm"
-                    className="flex-grow-1"
-                  >
-                    <FaDownload className="me-1" />
                     Hóa Đơn
-                  </Button>
+                  </ActionButton>
                 </>
               )}
               
               {(order.status === 'shipping' || order.status === 'preparing') && (
-                <Button 
-                  variant="outline-info" 
-                  size="sm"
-                  className="flex-grow-1"
+                <ActionButton 
+                  variant="outline-info"
+                  icon={<FaShippingFast />}
+                  className="w-100"
                 >
-                  <FaShippingFast className="me-1" />
                   Theo Dõi
-                </Button>
+                </ActionButton>
               )}
             </div>
           </Col>
@@ -604,12 +583,12 @@ const OrderHistory = () => {
           box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
-        .btn-outline-primary, .btn-outline-secondary, .btn-outline-success, .btn-outline-info {
+        .btn-outline-primary, .btn-outline-secondary, .btn-outline-success, .btn-outline-info, .btn-outline-warning {
           border-radius: 20px;
           transition: all 0.3s ease;
         }
         
-        .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-outline-success:hover, .btn-outline-info:hover {
+        .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-outline-success:hover, .btn-outline-info:hover, .btn-outline-warning:hover {
           transform: translateY(-1px);
         }
 
